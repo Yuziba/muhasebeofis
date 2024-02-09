@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% load static %}
+
+{%block content%}
+<h1>Add Tweet By model Form</h1>
+<div class="container deneme" style="width: 50%; background-color:yellow;">
+    
+        <form action="" method="POST">
+            {%csrf_token%}
+            <!--
+                {% for field in form%}
+                <div>
+                    {{field.label_tag}}
+                    {{user}}
+                </div>
+            {%endfor%}
+            -->
+            
+                <div style="width: 100%; background-color:green">
+                    <label for="{{ form.username.id_for_label }}">Username:</label>
+                    {{ user }}
+                </div>
+                <div style="width: 100%; background-color:orange">
+                    <label for="{{ form.message.id_for_label }}">Message:</label>
+                    {{ form.message }}
+                </div>
+
+                <div class="deneme" style="width: 100%; ">
+                    {{ user }}
+                    {{ form.message }} 
+                </div>
+                
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Send Tweet</button>
+                <div class="deneme">
+                    <h3>sfsdfd</h3>
+                </div>
+
+                
+        </form>
+
+
+
+        <br>
+        <br>
+        <form action="" method="POST">
+            {%csrf_token%}
+            
+                <div style="width: 100%; background-color:green">
+                    <label for="{{ form.username.id_for_label }}">Username:</label>
+                    {{ user }}
+                </div>
+                <div style="width: 100%; background-color:orange">
+                    <label for="{{ form.message.id_for_label }}">Message:</label>
+                    {{ form.message }}
+                </div>
+
+                <div class="deneme" style="width: 100%; ">
+                    {{ user }}
+                    {{ form.message }} 
+                </div>
+                
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Send Tweet</button>
+                <div class="deneme">
+                    <h3>sfsdfd</h3>
+                </div>
+
+                
+        </form>
+</div>
+{%endblock%}

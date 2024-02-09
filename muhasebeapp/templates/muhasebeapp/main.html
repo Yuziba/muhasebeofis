@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{%block content%}
+    <h1>Anasayfa</h1>
+    <div class="container" style="width: 50%;">
+        {%for aa in tweets%}
+            <div class="card" style="padding: 10px;">
+                <div class="card-header">
+                    <!--{{aa.nickname}}    model de degisiklik yaptik username oldu-->
+                    {{aa.username}}
+                </div>
+                <div class="card-body">
+                    <p class="card-text">{{aa.message}}</p>
+                </div>
+                <a href="{% url 'muhasebeapp:deletetweet' id=aa.id %}" class="btn btn-danger">Delete</a>
+            </div>
+        {%endfor%}
+    </div>
+{%endblock%}
