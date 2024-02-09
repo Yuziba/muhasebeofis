@@ -1,21 +1,18 @@
 {% extends "base.html"%}
 
 {% block content%}
-<h2>Deneme addtweet</h2>
-<form action="" method="POST">
-    {% csrf_token%}
-    <!--  model.py icinde username olarak gedisiklik yaptik
+<div class="container">
+  <h3>Onay Kayit Defteri</h3>
+  <form action="" method="POST">
+      {% csrf_token%}
+      
       <div class="mb-3">
-      <label for="nickname" class="form-label">Nickname</label>
-      <input type="text" class="form-control" id="nickname" name="nickname">
-    </div>
-    -->
-    <div class="mb-3">
-      <label for="message" class="form-label">Message</label>
-      <input type="text" class="form-control" id="message" name="message">
-    </div>
-    <button type="submit" class="btn btn-primary">Gonder</button>
+        <label for="message" class="form-label">Message</label>
+        <input type="text" class="form-control" id="message" name="message">
+      </div>
+      <button type="submit" class="btn btn-primary">Gonder</button>
   </form>
-  <p>{{request.path}}</p>
+</div>
+  
   
 {%endblock%}
