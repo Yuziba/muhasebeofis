@@ -13,34 +13,22 @@ def main(request):
     tweetdict = {"tweets": all_tweets}
     return render(request, 'muhasebeapp/main.html', context=tweetdict)
 
+
 def addtweet(request):
     if request.POST:
-        #nickname = request.POST["nickname"]   modelde degisiklik yaptik
-        message = request.POST["message"]
-        #models.MuhasebeModel.objects.create(nickname=nickname, message=message)
-        models.MuhasebeModel.objects.create(username=request.user, message=message)
+        onayno          = request.POST.get("onayno", "")
+        onayaciklama    = request.POST.get("onayaciklama", "")
+
+        onaytar         = request.POST.get("onaytar", "")
+        onay_odemetutar = request.POST.get("onay_odemetutar", "")
+        onay_parabirimi = request.POST.get("onay_parabirimi", "")
+        onay_odemeyolu  = request.POST.get("onay_odemeyolu", "")
+        models.MuhasebeModel.objects.create(username=request.user, onayno=onayno, onayaciklama=onayaciklama, onaytar=onaytar, onay_odemetutar=onay_odemetutar, onay_parabirimi= onay_parabirimi,onay_odemeyolu=onay_odemeyolu,)
         return redirect(reverse('muhasebeapp:main'))
     else:
         return render(request, 'muhasebeapp/addtweet.html')
     
-@login_required(login_url="/login")
-def addtweetbymodelform(request):
-    if request.method == "POST":
-        form = AddTweetModelForm(request.POST)
-        if form.is_valid():
-            #nickname = form.cleaned_data["nickname"]   //modelde username olarak degistirdik
-            username = form.cleaned_data["username"]
-            message = form.cleaned_data["message"]
-            #models.MuhasebeModel.objects.create(nickname=nickname, message=message)        ////modelde username olarak degistirdik
-            models.MuhasebeModel.objects.create(username=request.user, message=message) 
-            return redirect(reverse('muhasebeapp:main'))
-        else:
-            print("error in form")
-            return render(request, "muhasebeapp/addtweetbymodelform.html", context={"form":form})
-    else:
-        form = AddTweetModelForm()
-        return render(request, "muhasebeapp/addtweetbymodelform.html", context={"form":form})
-    
+ 
 
 class SignUpView(CreateView):
     form_class = UserCreationForm

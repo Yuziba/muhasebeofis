@@ -1,18 +1,72 @@
 {% extends "base.html" %}
 
+
 {%block content%}
-    <h1>Anasayfa</h1>
-    <div class="container" style="width: 50%;">
+    <h1>Onay Kayit Defteri Yeni</h1>
+
+    <button id="openNewWindowButton">Open New Window</button>
+    <script>
+        $(document).ready(function() {
+            $("#openNewWindowButton").click(function() {
+                // Yeni pencere açma işlemi
+                var newWindow = window.open('{% url 'muhasebeapp:addtweet' %}', '_blank', 'height=auto,width=auto');
+                if (newWindow) {
+                    var screenWidth = window.screen.width;
+                    var screenHeight = window.screen.height;
+    
+                    var windowWidth = 800;
+                    var windowHeight = 500;
+    
+                    var left = (screenWidth - windowWidth) / 2;
+                    var top = (screenHeight - windowHeight) / 2;
+    
+                    newWindow.moveTo(left, top);
+                }
+            });
+        });
+    </script>
+
+
+
+    <!--<a href="{% url 'muhasebeapp:addtweet' %}" target ="_blank" class="btn btn-danger">yeni sekme acma</a>-->
+    <div class="" style="width: 100%; margin:auto">
+        <div class="card">
+            <div class="card-header" style="text-align: center;">
+                <div class="" style="display: flex;">
+                    <div class="" style="width: 3%;"><h5>Sıra</h5></div>
+                    <div class="" style="width: 6%;"><h5>Tarih</h5></div>
+                    <div class="" style="width: 61%;"><h5>Açıklama</h5></div>
+                    <div class="" style="width: 11%;"><h5>Ödenecek Tutar</h5></div>
+                    <div class="" style="width: 4%;"><h5>Birim</h5></div>
+                    <div class="" style="width: 6%;"><h5>Ödeme Yolu</h5></div>
+                    <div class="" style="width: 9%;"><h5>SGB Belge No</h5></div>
+                    <div class="" style="width: 3%;"><h5>Yazar</h5></div>
+        
+                </div>
+            </div>
+        </div>
+    </div>
+          
+
+    <div class="" style="width: 100%; margin:auto">
         {%for aa in tweets%}
-            <div class="card" style="padding: 10px;">
-                <div class="card-header">
-                    <!--{{aa.nickname}}    model de degisiklik yaptik username oldu-->
-                    {{aa.username}}
-                </div>
-                <div class="card-body">
-                    <p class="card-text">{{aa.message}}</p>
-                </div>
-                <a href="{% url 'muhasebeapp:deletetweet' id=aa.id %}" class="btn btn-danger">Delete</a>
+            <div class="card">
+                    
+                    <div class="min-height-div" style="display: flex; text-align:center; align-items: center;"> <!--height:60px;  uygun gibi-->
+                        <div class="" style="width: 3%; border-right: 1px solid #000;">{{forloop.counter}}</div>
+                        <div class="" style="width: 6%; border-right: 1px solid #000;">{{aa.onaytar}}</div> 
+                        <div class="" style="width: 61%; border-right: 1px solid #000;">{{aa.onayaciklama}}</div> 
+                        <div class="" style="width: 11%; border-right: 1px solid #000;">{{aa.onay_odemetutar}}</div>
+                        <div class="" style="width: 4%; border-right: 1px solid #000;">{{aa.onay_parabirimi}}</div>
+                        <div class="" style="width: 6%; border-right: 1px solid #000;">{{aa.onay_odemeyolu}}</div>
+                        <div class="" style="width: 9%;">{{aa.onayno}}</div> <!--belge no-->
+                        <div style="display:flex; flex-direction: column;">
+                            {{aa.username}}
+                            <a href="{% url 'muhasebeapp:deletetweet' id=aa.id %}" class="btn btn-danger btn-sm">Sil</a>
+                        </div>
+                    </div>
+                    
+                    
             </div>
         {%endfor%}
     </div>
