@@ -1,0 +1,29 @@
+<!-- onaybelgeler.html -->
+
+{% extends 'base.html' %}
+{% block content %}
+  <h2>Belge Yükleme ve Listeleme</h2>
+
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Yükle</button>
+  </form>
+
+  <h3>Belge Listesi</h3>
+  <ul>
+    {% for belge in onayBelgeler %}
+      <li>
+        {{ belge.dosya.name }} - {{ belge.yukleme_tarihi }}
+        <form method="post" action="{% url 'muhasebeapp:sil_belge' belge.id %}">
+          {% csrf_token %}
+          <button type="submit">Sil</button>
+        </form>
+        <a href="{% url 'muhasebeapp:indir_belge' belge.id %}" download>
+          <button type="button">İndir</button>
+        </a>
+      </li>
+    {% endfor %}
+  </ul>
+
+{% endblock %}

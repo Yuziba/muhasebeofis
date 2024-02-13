@@ -14,3 +14,10 @@ class MuhasebeModel(models.Model):
 
     def __str__(self):
         return f"Tweet nick: {self.username} Belgeno: {self.onayno} Aciklama: {self.onayaciklama} Tarih: {self.onaytar} Odeme Tutrari: {self.onay_odemetutar} Para Birimi: {self.onay_parabirimi} Odeme youlu: {self.onay_odemeyolu}"
+
+class OnayBelgeModel(models.Model):
+    dosya = models.FileField(upload_to='belgeler/')
+    yukleme_tarihi = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.dosya.name
