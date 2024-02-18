@@ -5,10 +5,10 @@ from django.urls import reverse, reverse_lazy
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.views.generic import CreateView
-from .forms import OnayBelgeForm
+from .forms import DocumentForm, OnayBelgeForm
 from django.core.files.storage import FileSystemStorage
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from .models import OnayBelgeModel
 import os
 
@@ -158,7 +158,6 @@ def belge_indir(request, belge_id):
             raise Http404("Belirtilen belge bulunamadı.")
     except FileNotFoundError:
         raise Http404("Belirtilen belge bulunamadı.")
-
 
 
 

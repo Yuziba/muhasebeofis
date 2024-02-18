@@ -1,4 +1,6 @@
 from django.urls import path, include
+
+from . import cal
 from . import views
 from django.conf import settings
 from django.conf.urls.static import static
@@ -14,7 +16,7 @@ urlpatterns = [
     path('api/', include('muhasebeapp.api.urls')),  # Yeni eklenen satır drag and drop icin
     path('belge/sil/<int:belge_id>/', views.belge_sil, name='sil_belge'),
     path('belge/indir/<int:belge_id>/', views.belge_indir, name='indir_belge'),
-    
+    path('upload', views.file_upload_view, name="file-upload"),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
